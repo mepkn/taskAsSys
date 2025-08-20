@@ -1,0 +1,42 @@
+# Node.js
+# =================================
+
+# Dependency directories
+node_modules/
+/dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+.env.local
+
+# Build files
+.eslintcache
+/coverage
+
+# Operating System Files
+# =================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.nfs*
