@@ -9,8 +9,6 @@ const connectDB = async (url: string) => {
   } catch (err) {
     console.error("MongoDB connection error:", err);
     process.exit(1);
-  } finally {
-    await mongoose.disconnect();
   }
 };
 
