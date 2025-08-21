@@ -1,0 +1,188 @@
+@baseUrl = http://localhost:5000/api
+
+# A token for a user with superadmin role
+@superadminToken = your_superadmin_token_here
+
+# A token for a user with employer role
+@employerToken = your_employer_token_here
+
+# A token for a user with employee role
+@employeeToken = your_employee_token_here
+
+# An example task ID
+@taskId = your_task_id_here
+
+# An example employee ID
+@employeeId = your_employee_id_here
+
+# An example employer ID
+@employerId = your_employer_id_here
+
+# An example reset token
+@resetToken = your_reset_token_here
+
+###
+# Auth routes
+###
+
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+###
+
+# @name forgotPassword
+POST {{baseUrl}}/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "test@example.com"
+}
+
+###
+
+# @name resetPassword
+PATCH {{baseUrl}}/auth/reset-password/{{resetToken}}
+Content-Type: application/json
+
+{
+  "password": "newPassword123"
+}
+
+###
+# Superadmin routes
+###
+
+# @name createEmployer
+POST {{baseUrl}}/superadmin/employers
+Content-Type: application/json
+Authorization: Bearer {{superadminToken}}
+
+{
+  "name": "New Employer",
+  "email": "employer@example.com",
+  "password": "password123"
+}
+
+###
+# Employer routes
+###
+
+# @name createEmployee
+POST {{baseUrl}}/employer/employees
+Content-Type: application/json
+Authorization: Bearer {{employerToken}}
+
+{
+  "name": "New Employee",
+  "email": "employee@example.com",
+  "password": "password123"
+}
+
+###
+
+# @name createTaskForEmployer
+POST {{baseUrl}}/employer/tasks
+Content-Type: application/json
+Authorization: Bearer {{employerToken}}
+
+{
+  "title": "New Task",
+  "description": "This is a new task.",
+  "deadline": "2025-12-31T23:59:59.000Z",
+  "assignedTo": ["{{employeeId}}"]
+}
+
+###
+
+# @name getAllTasksForEmployer
+GET {{baseUrl}}/employer/tasks
+Authorization: Bearer {{employerToken}}
+
+###
+
+# @name getTaskByIdForEmployer
+GET {{baseUrl}}/employer/tasks/{{taskId}}
+Authorization: Bearer {{employerToken}}
+
+###
+
+# @name updateTaskForEmployer
+PATCH {{baseUrl}}/employer/tasks/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{employerToken}}
+
+{
+  "title": "Updated Task Title",
+  "description": "Updated task description.",
+  "deadline": "2026-01-15T23:59:59.000Z"
+}
+
+###
+
+# @name deleteTaskForEmployer
+DELETE {{baseUrl}}/employer/tasks/{{taskId}}
+Authorization: Bearer {{employerToken}}
+
+###
+
+# @name getTaskReport
+GET {{baseUrl}}/employer/reports/tasks
+Authorization: Bearer {{employerToken}}
+
+###
+# Employee routes
+###
+
+# @name getAllTasksForEmployee
+GET {{baseUrl}}/employee/tasks
+Authorization: Bearer {{employeeToken}}
+
+###
+
+# @name updateTaskStatusForEmployee
+PATCH {{baseUrl}}/employee/tasks/{{taskId}}/status
+Content-Type: application/json
+Authorization: Bearer {{employeeToken}}
+
+{
+  "status": "In Progress"
+}
+
+###
+# Task routes (Comments and Files)
+###
+
+# @name createCommentOnTask
+POST {{baseUrl}}/tasks/{{taskId}}/comments
+Content-Type: application/json
+Authorization: Bearer {{employeeToken}}
+
+{
+  "text": "This is a comment on the task."
+}
+
+###
+
+# @name getCommentsOnTask
+GET {{baseUrl}}/tasks/{{taskId}}/comments
+Authorization: Bearer {{employeeToken}}
+
+###
+
+# @name uploadFileToTask
+POST {{baseUrl}}/tasks/{{taskId}}/files
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{employeeToken}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="example.txt"
+Content-Type: text/plain
+
+< ./example.txt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
