@@ -70,6 +70,12 @@ Authorization: Bearer {{superadminToken}}
 }
 
 ###
+
+# @name getAllEmployersByAdmin
+GET {{baseUrl}}/superadmin/employers
+Authorization: Bearer {{superadminToken}}
+
+###
 # Employer routes
 ###
 
@@ -153,6 +159,12 @@ Authorization: Bearer {{employeeToken}}
 {
   "status": "In Progress"
 }
+
+###
+
+# @name getAllEmployersByEmployee
+GET {{baseUrl}}/employee/employers
+Authorization: Bearer {{employeeToken}}
 
 ###
 # Task routes (Comments and Files)

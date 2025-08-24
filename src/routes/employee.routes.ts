@@ -1,4 +1,5 @@
 import express from "express";
+import { getAllEmployers } from "../controllers/employee.controller";
 import {
   getAllTasksForEmployee,
   updateTaskStatus,
@@ -13,5 +14,7 @@ router.use(authenticateUser, isEmployee);
 
 router.get("/tasks", getAllTasksForEmployee);
 router.patch("/tasks/:id/status", updateTaskStatus);
+
+router.get("/employers", getAllEmployers);
 
 export default router;

@@ -47,3 +47,16 @@ export const createEmployer = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server error creating employer", error });
   }
 };
+
+export const getAllEmployers = async (req: Request, res: Response) => {
+  try {
+    const employers = await User.find({ role: "Employer" }).select(
+      "name email"
+    );
+    res.status(200).json({ success: true, employers });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Server error retrieving employers", error });
+  }
+};

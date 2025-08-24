@@ -1,5 +1,8 @@
 import express from "express";
-import { createEmployer } from "../controllers/superadmin.controller";
+import {
+  createEmployer,
+  getAllEmployers,
+} from "../controllers/superadmin.controller";
 import { authenticateUser } from "../middleware/auth.middleware";
 import { isSuperAdmin } from "../middleware/role.middleware";
 
@@ -9,5 +12,6 @@ const router = express.Router();
 router.use(authenticateUser, isSuperAdmin);
 
 router.post("/employers", createEmployer);
+router.get("/employers", getAllEmployers);
 
 export default router;
