@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./db/connect";
-import authRoutes from "./routes/authRoutes";
-import superadminRoutes from "./routes/superadmin.routes";
-import employerRoutes from "./routes/employer.routes";
+import authRoutes from "./routes/auth.routes";
 import employeeRoutes from "./routes/employee.routes";
+import employerRoutes from "./routes/employer.routes";
+import superadminRoutes from "./routes/superadmin.routes";
 import taskRoutes from "./routes/task.routes";
 
 dotenv.config();

@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 interface EmailOptions {
   to: string;
@@ -10,8 +10,8 @@ interface EmailOptions {
 // In a real app, these values would come from process.env
 const EMAIL_HOST = "smtp.ethereal.email";
 const EMAIL_PORT = 587;
-const EMAIL_USER = "your_ethereal_user@ethereal.email"; // Replace with your Ethereal user
-const EMAIL_PASSWORD = "your_ethereal_password"; // Replace with your Ethereal password
+const EMAIL_USER = "claudia.eichmann41@ethereal.email"; // Replace with your Ethereal user
+const EMAIL_PASSWORD = "eJzwWenvKgCmN4gDRu"; // Replace with your Ethereal password
 
 const transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
@@ -32,12 +32,12 @@ export const sendEmail = async (options: EmailOptions) => {
       html: options.html,
     });
 
-    console.log('Message sent: %s', info.messageId);
+    console.log("Message sent: %s", info.messageId);
     // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     return info;
   } catch (error) {
-    console.error('Error sending email:', error);
-    throw new Error('Email could not be sent');
+    console.error("Error sending email:", error);
+    throw new Error("Email could not be sent");
   }
 };

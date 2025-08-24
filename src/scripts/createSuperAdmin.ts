@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import User from "../models/user.model";
 import connectDB from "../db/connect";
+import User from "../models/user.model";
 
-dotenv.config({ path: '../../.env' }); // Adjust path to .env file if needed
+dotenv.config();
 
 const createSuperAdmin = async () => {
   const MONGO_URI = process.env.MONGO_URI;

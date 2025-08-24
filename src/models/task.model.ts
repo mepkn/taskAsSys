@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
 export interface ITask extends Document {
   title: string;
@@ -8,6 +8,7 @@ export interface ITask extends Document {
   assignedTo: Schema.Types.ObjectId[];
   createdBy: Schema.Types.ObjectId;
   isDeleted: boolean;
+  deadlineReminderSent: boolean;
 }
 
 const taskSchema = new Schema<ITask>(
@@ -51,7 +52,7 @@ const taskSchema = new Schema<ITask>(
       default: false,
     },
   },
-  { timestamps:true }
+  { timestamps: true }
 );
 
 const Task = model<ITask>("Task", taskSchema);
