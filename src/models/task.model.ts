@@ -46,8 +46,12 @@ const taskSchema = new Schema<ITask>(
       type: Boolean,
       default: false,
     },
+    deadlineReminderSent: {
+      type: Boolean,
+      default: false,
+    },
   },
-  { timestamps: true }
+  { timestamps:true }
 );
 
 const Task = model<ITask>("Task", taskSchema);

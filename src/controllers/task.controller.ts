@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Task from "../models/task.model";
 import User from "../models/user.model";
+import Activity from "../models/activity.model";
 import { sendEmail } from "../services/notification.service";
 import validator from "validator";
 
@@ -38,6 +39,14 @@ export const createTask = async (req: Request, res: Response) => {
             text: `Hi ${employee.name},\n\nA new task "${task.title}" has been assigned to you. The deadline is ${task.deadline.toDateString()}.\n\nPlease log in to view the details.`,
             html: `<p>Hi ${employee.name},</p><p>A new task "<strong>${task.title}</strong>" has been assigned to you. The deadline is <strong>${task.deadline.toDateString()}</strong>.</p><p>Please log in to view the details.</p>`
         }).catch(err => console.error(`Failed to send email to ${employee.email}`, err));
+    });
+
+    // Log the activity
+    await Activity.create({
+      task: task._id,
+      user: employerId,
+      type: 'Created',
+      details: `Task created and assigned to ${employees.map(e => e.name).join(', ')}.`,
     });
 
     res.status(201).json({ success: true, task });
@@ -123,8 +132,17 @@ export const updateTaskStatus = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Task not found or you are not authorized to update it." });
         }
 
+        const oldStatus = task.status;
         task.status = status;
         await task.save();
+
+        // Log the activity
+        await Activity.create({
+            task: task._id,
+            user: req.user?.userId,
+            type: 'StatusChanged',
+            details: `Status updated from ${oldStatus} to ${status}.`,
+        });
 
         if (status === 'Completed') {
             const employer = await User.findById(task.createdBy);

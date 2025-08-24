@@ -6,11 +6,15 @@ import {
 import { uploadFile } from "../controllers/file.controller";
 import { authenticateUser } from "../middleware/auth.middleware";
 import upload from "../middleware/upload.middleware";
+import activityRoutes from "./activity.routes";
 
 const router = express.Router();
 
 // All routes in this file are protected
 router.use(authenticateUser);
+
+// Activity routes
+router.use("/:taskId/activities", activityRoutes);
 
 // Comment routes
 router

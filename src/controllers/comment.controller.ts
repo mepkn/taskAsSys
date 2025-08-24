@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Comment from "../models/comment.model";
 import Task from "../models/task.model";
+import Activity from "../models/activity.model";
 
 export const createComment = async (req: Request, res: Response) => {
   const { text } = req.body;
@@ -25,6 +26,14 @@ export const createComment = async (req: Request, res: Response) => {
       text,
       taskId,
       userId,
+    });
+
+    // Log the activity
+    await Activity.create({
+      task: taskId,
+      user: userId,
+      type: 'Commented',
+      details: `Added a comment.`, // Simple message for now
     });
 
     res.status(201).json({ success: true, comment });

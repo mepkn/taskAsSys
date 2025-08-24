@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import File from "../models/file.model";
 import Task from "../models/task.model";
+import Activity from "../models/activity.model";
 
 export const uploadFile = async (req: Request, res: Response) => {
   const { taskId } = req.params;
@@ -27,6 +28,16 @@ export const uploadFile = async (req: Request, res: Response) => {
       taskId: taskId,
       uploadedBy: userId,
     });
+
+    // Log the activity
+    if(req.file) {
+        await Activity.create({
+            task: taskId,
+            user: userId,
+            type: 'FileUploaded',
+            details: `Uploaded file: ${req.file.filename}`,
+        });
+    }
 
     res.status(201).json({ success: true, message: "File uploaded successfully", file: newFile });
   } catch (error) {
