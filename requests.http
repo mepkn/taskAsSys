@@ -1,13 +1,13 @@
 @baseUrl = http://localhost:5000/api
 
 # A token for a user with superadmin role
-@superadminToken = your_superadmin_token_here
+@superadminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGFiNDNjNzYyMzYyNzRkMTUwMzQ5YTciLCJyb2xlIjoiU3VwZXJBZG1pbiIsImlhdCI6MTc1NjA5ODM0MSwiZXhwIjoxNzU2MDk5MzQwfQ.vjOUxuyHbI_pJVbhy95Buzt_xYm11XdDi2xRDys7qr0
 
 # A token for a user with employer role
-@employerToken = your_employer_token_here
+@employerToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGFiNDcyN2FhMGMwMTlmZTE2OGE1MzEiLCJyb2xlIjoiRW1wbG95ZXIiLCJpYXQiOjE3NTYwOTg1NjYsImV4cCI6MTc1NjA5OTU2NX0.1nVi6pmkNkY8ToC9Kg3cfALQtQFmr1drK0hWg54sIMc
 
 # A token for a user with employee role
-@employeeToken = your_employee_token_here
+@employeeToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGFiNDdkZmFhMGMwMTlmZTE2OGE1MzUiLCJyb2xlIjoiRW1wbG95ZWUiLCJpYXQiOjE3NTYwOTgzOTYsImV4cCI6MTc1NjA5OTM5NX0.Z9brDb2qXiYSdXkUL7Fh7TEdoeLuGoLs-aVPeHwD8A0
 
 # An example task ID
 @taskId = your_task_id_here
@@ -16,7 +16,7 @@
 @employeeId = your_employee_id_here
 
 # An example employer ID
-@employerId = your_employer_id_here
+@employerId = 68ab4727aa0c019fe168a531
 
 # An example reset token
 @resetToken = your_reset_token_here
@@ -30,8 +30,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
-  "password": "password123"
+  "email": "employer1@example.com",
+  "password": "Weareone1"
 }
 
 ###
